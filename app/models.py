@@ -14,6 +14,7 @@ class User(Base):
     amps = Column( JSON, nullable=False, default=dict )
     pedals = Column( JSON, nullable=False, default=dict )
     current_rig = Column( JSON, nullable=False, default=dict )
+    created_at = Column( TIMESTAMP, nullable=False )
 
 class Guitar(Base):
     __tablename__ = "guitars"
@@ -70,4 +71,19 @@ class RigItem(Base):
     position = Column( int, nullable=False )  # e.g., 1 for guitar, 2 for amp, etc.
     item_type = Column( String, nullable=False )  # e.g., guitar, amp, pedal
     item_id = Column( UUID(as_uuid=True), nullable=False )  # ID of the item in the respective table
+    created_at = Column( TIMESTAMP, nullable=False )
+
+class TonePrompt(Base):
+    __tablename__ = "tone_prompts"
+    id = Column( UUID(as_uuid=True), primary_key=True, default=uuid.uuid4 )
+    user_id = Column( UUID(as_uuid=True), ForeignKey('users.id'), nullable=False )
+    prompt = Column( String, nullable=False )
+    created_at = Column( TIMESTAMP, nullable=False )
+
+class ToneResponse(Base):
+    __tablename__ = "tone_responses"
+    id = Column( UUID(as_uuid=True), primary_key=True, default=uuid.uuid4 )
+    prompt_id = Column( UUID(as_uuid=True), ForeignKey('tone_prompts.id'), nullable=False )
+    rig_id = Column( UUID(as_uuid=True), ForeignKey('rigs.id'), nullable=False )
+    response = Column( JSON, nullable=False )
     created_at = Column( TIMESTAMP, nullable=False )

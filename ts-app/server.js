@@ -1,5 +1,5 @@
 const express = require('express')
-const pool = require('./db')
+const pool = require('./db/db')
 const port = 1337
 
 const app = express()
@@ -7,6 +7,8 @@ app.use(express.json())
 
 //routes
 app.get('/', (req, res) => {
+    res.json({ info: 'Tonerator app: build with Express, Node, and Postgres'
+    })
     res.sendStatus(200)
 })
 

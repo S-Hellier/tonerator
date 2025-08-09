@@ -1,5 +1,6 @@
 const express = require('express')
 const instrumentsRouter = require('./routes/instruments')
+const usersRouter = require('./routes/users')
 const port = 1337
 
 const app = express()

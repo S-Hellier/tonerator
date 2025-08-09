@@ -5,6 +5,7 @@ const port = 1337
 const app = express()
 app.use(express.json())
 app.use('/instruments', instrumentsRouter)
+app.use('/users', usersRouter)
 
 //routes
 app.get('/', (req, res) => {

@@ -1,10 +1,10 @@
 const express = require('express');
 const db = require('../db/db');
 
-const instruments = express.Router();
+const gear = express.Router();
 
 // Create a new guitar
-instruments.post('/guitars', async (req, res) => {
+gear.post('/guitars', async (req, res) => {
   const {
     user_id,
     name,
@@ -55,4 +55,52 @@ instruments.post('/guitars', async (req, res) => {
   }
 });
 
-module.exports = instruments;
+gear.post('/amps', async (req, res) => {
+  const {
+    user_id,
+    name,
+    brand,
+    model,
+    year,
+    type,
+    specs,
+  } = req.body;
+
+  if (!name || !brand || !model || !type) {
+    return res.status(400).json({
+      error: 'Missing required fields: name, brand, model, type',
+    });
+  }
+
+  try {
+    const [created] = await db('amps')
+      .insert({
+        user_id,
+        name,
+        brand,
+        model,
+        year,
+        type,
+        specs,
+      })
+      .returning([
+        'id',
+        'user_id',
+        'name',
+        'brand',
+        'model',
+        'year',
+        'type',
+        'specs',
+        'created_at',
+        'updated_at',
+      ]);
+
+    return res.status(201).json(created);
+  } catch (error) {
+    console.error('Error creating amp:', error);
+    return res.status(500).json({ error: 'Failed to create amp' });
+  }
+});
+
+module.exports = gear;

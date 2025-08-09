@@ -1,11 +1,11 @@
 const express = require('express')
-const instrumentsRouter = require('./routes/instruments')
+const instrumentsRouter = require('./routes/gear')
 const usersRouter = require('./routes/users')
 const port = 1337
 
 const app = express()
 app.use(express.json())
-app.use('/instruments', instrumentsRouter)
+app.use('/gear', gearRouter)
 app.use('/users', usersRouter)
 
 //routes

@@ -1,9 +1,10 @@
 const express = require('express')
-const pool = require('./db/db')
+const instrumentsRouter = require('./routes/instruments')
 const port = 1337
 
 const app = express()
 app.use(express.json())
+app.use('/instruments', instrumentsRouter)
 
 //routes
 app.get('/', (req, res) => {
@@ -18,6 +19,7 @@ app.post('/', (req, res) => {
         message: `YOUR KEYS WERE ${name}, ${location}`
     })
 })
+
 
 // app.get('/setup', async (req, res) => {
 //     try {

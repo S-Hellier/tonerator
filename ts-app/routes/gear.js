@@ -139,7 +139,15 @@ gear.post('/pedals', async (req, res) => {
         'name',
         'brand',
         'model',
-      ])
+        'type',
+        'version',
+        'year',
+        'controls',
+        'created_at',
+        'updated_at',
+      ]);
+
+    return res.status(201).json(created);
   } catch (error) {
     console.error('Error creating pedal:', error);
     return res.status(500).json({ error: 'Failed to create pedal' });

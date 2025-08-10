@@ -1,5 +1,5 @@
 const express = require('express')
-const instrumentsRouter = require('./routes/gear')
+const gearRouter = require('./routes/gear')
 const usersRouter = require('./routes/users')
 const port = 1337
 

@@ -15,13 +15,6 @@ app.get('/', (req, res) => {
     res.sendStatus(200)
 })
 
-app.post('/', (req, res) => {
-    const { name, location } = req.body
-    res.status(200).send({
-        message: `YOUR KEYS WERE ${name}, ${location}`
-    })
-})
-
 
 // app.get('/setup', async (req, res) => {
 //     try {
